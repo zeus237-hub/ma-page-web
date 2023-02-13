@@ -1,0 +1,513 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BTCXEM</title>
+    <link href="/css/bs_min.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery_min.js"></script>
+    <script src="/js/bs_min.js"></script>
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
+    <script src="/layui/layui.all.js"></script>
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <style>
+        body{
+              background-color: #ededed;
+        }
+        body,html{
+              background-color: #ededed;
+              padding: 0;
+              margin: 0;
+        }
+        h1,h2,h3,h4,h5,h6,h7{margin:0;padding:0}
+        .headerBox{
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 80px;
+            background-color: #7670d9;
+            display: flex;
+            z-index: 99;
+        }
+        .logolefttop{
+            width: 250px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .nav-left-Box{
+            width: 250px;
+            height: calc(100vh - 80px);
+            background-color: #fff;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            z-index: 99;
+            padding-bottom: 150px;
+            overflow-y: auto;
+        }
+        .bodyBox{
+            width: calc(100% - 250px);
+            height: calc(100vh - 80px);
+            background-color: #fff;
+            position: fixed;
+            top: 80px;
+            right: 0;
+            z-index: 1;
+            overflow-y: auto;
+        }
+        .daohangHeader{
+            width: 190px;
+            height: 50px;
+            line-height: 50px;
+            padding-left: 60px;
+            color: #8891b9;
+            font-size: 20px;
+        }
+        .nav-left-Box-List{
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            padding-left: 30px;
+            font-size: 14px;
+            color: #6046ff;
+            -webkit-filter:grayscale(80%);
+            filter:grayscale(80%);
+            cursor: pointer;
+        }
+        .nav-left-Box-List:hover{
+            background-color: #f6f7fb;
+        }
+        .nav-left-Box-List.active{
+            -webkit-filter:grayscale(0%);
+            filter:grayscale(0%);
+            background-color: #f6f7fb;
+        }
+        .headerTouxiangBox{
+            width: calc(100% - 250px - 250px);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            padding-left: 40px;
+        }
+        .touxiang{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+        .vipBox{
+            width: 125px;
+            height: 50px;
+            border-radius: 12px;
+            background-color: #ededed;
+            display: flex;
+            align-items: center;
+        }
+        .vipimg{
+            height: 40px;
+            margin-right: 5px;
+        }
+        .header-right-Box{
+            width: 250px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #fff;
+            padding: 0 30px;
+        }
+        .header-right-Box div{
+            width: 50%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-right-Box div img{
+            height: 18px;
+            margin: 0 10px;
+        }
+        .header-right-Box div a{
+            color: #fff;
+        }
+        .vipmobil{
+            display: none;
+        }
+        .right-mobb{
+            display: none;
+            color: #fff;
+        }
+        .menumenu{
+            display: none;
+        }
+        .zhezhaoBox{display:none}
+        .bodyBox iframe{
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+        }
+        /*PC样式*/
+      @media only screen and (max-width: 600px) {
+        .logolefttop img{
+            height: 5vw;
+        }
+        .logolefttop{
+            height: 13vw;
+            width: auto;
+            padding: 0 3vw;
+        }
+        .headerTouxiangBox{
+            flex: 1;
+        }
+        .headerBox{
+            height: 13vw;
+        }
+        .header-right-Box{
+            display: none;
+        }
+        .vipBox{
+            display: none;
+        }
+        .headerTouxiangBox{
+            height: 13vw;
+        }
+        .vipmobil{
+            display: block;
+            color: #fff;
+        }
+        .right-mobb{
+            display: block;
+            color: #fff;
+            line-height: 13vw;
+            padding: 0 10px;
+        }
+        .nav-left-Box {
+            width: 250px;
+            height: calc(100vh - 13vw);
+            background-color: #fff;
+            position: fixed;
+            top: 13vw;
+            left: 0;
+        }
+        .menumenu{
+            display: block;
+            height: 5vw;
+            margin: 0 2vw;
+        }
+        .nav-left-Box{
+            left: -250px;
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            -ms-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+        .nav-left-Box.active{
+            left: 0px;
+        }
+        .headerTouxiangBox{
+            padding-left: 2vw;
+        }
+        .nameBox{
+            padding: 0 2vw !important;
+        }
+        .touxiang{
+            width: 8vw;
+            height:8vw;
+        }
+        .zhezhaoBox{
+            display: block;
+            position: fixed;
+            top: 13vw;
+            left: 100vw;
+            width: calc(100% - 250px);
+            height: calc(100vh - 13vw);
+            z-index: 99;
+            opacity: 0;
+            background-color: rgba(0,0,0,.5);
+            -webkit-transition: all 0.5s;
+            -moz-transition: all 0.5s;
+            -ms-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+        .zhezhaoBox.active{
+            display: block;
+            position: fixed;
+            top: 13vw;
+            opacity: 1;
+            left: 250px;
+            width: calc(100% - 250px);
+            height: calc(100vh - 13vw);
+            z-index: 99;
+            background-color: rgba(0,0,0,.3);
+        }
+        .bodyBox{
+            width: 100%;
+            height: calc(100vh - 13vw);
+            background-color: #fff;
+            position: fixed;
+            top: 13vw;
+            right: 0;
+            z-index: 1;
+            overflow-y: auto;
+        }
+        .nav-left-Box-List{
+            padding-left: 20px;
+        }
+        .bodyBox iframe{
+            width: 100%;
+            height: calc(100vh - 13vw);
+        }
+      }
+
+      @font-face {
+        font-family: 'iconfont';  /* project id 1927645 */
+        src: url('//at.alicdn.com/t/font_1927645_0pxkiai2sx5l.eot');
+        src: url('//at.alicdn.com/t/font_1927645_0pxkiai2sx5l.eot?#iefix') format('embedded-opentype'),
+        url('//at.alicdn.com/t/font_1927645_0pxkiai2sx5l.woff2') format('woff2'),
+        url('//at.alicdn.com/t/font_1927645_0pxkiai2sx5l.woff') format('woff'),
+        url('//at.alicdn.com/t/font_1927645_0pxkiai2sx5l.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_1927645_0pxkiai2sx5l.svg#iconfont') format('svg');
+        }
+        .iconfont{
+        font-family:"iconfont" !important;
+        font-size:16px;font-style:normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;
+        }
+  </style>
+<body>
+    <div class="headerBox">
+    <div style="display:flex;align-items:center;padding-left:2vw" class="menumenuBox">
+            <img src="image/menu.png" class="menumenu">
+        </div>
+        <div class="logolefttop">
+            <img src="/image/logolefttop.png"/>
+        </div>
+        <div class="headerTouxiangBox">
+                <img src="/image/touxiang.png" class="touxiang">
+                <div style="color:#fff;padding:0 20px" class="nameBox">Xinbei</div>
+                <div class="vipmobil">
+                    <!-- VIP 6               -->
+                </div>
+        </div>
+        <a class="right-mobb" href="/login.php?status=logout">
+            Logout
+        </a>
+        <div class="header-right-Box">
+            <div>
+                <img src="/image/dl.png">
+                    <a href="/login.php?status=logout">Logout</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="nav-left-Box">
+        <div style="padding-left:10px; font-size:14px;line-height:20px;margin-top:20px;overflow:hidden">
+            <div style="float:left;width:100%">
+                <strong>02-13-2023 04:11:25</strong><br /><br />
+                <strong><span style="color:green">
+                    <p id='info'></p></span></strong>
+                    <p id='infotime'></p>
+                
+            </div>
+            <div style="float:left;width:100%">
+               &nbsp;
+            </div>
+            <div style="float:left;width:50%">
+                 My Status：
+            </div>
+            <div style="float:right;width:50%;font-weight:bold">
+                 VIP 6
+            </div>
+            <div style="float:left;width:50%">
+                My Balance：
+            </div>
+            <div style="float:right;width:50%">
+                <span style="color:green;"><strong>฿ 58.81890</strong></span>
+            </div>
+            <div style="float:left;width:50%">
+                Balance Worth：
+            </div>
+            <div style="float:right;width:50%">
+                <strong><span style="color:green;" id='info2'></span></strong>
+            </div>
+        </div>
+
+        <div style="height:20px"></div>
+
+        <div class="nav-left-Box-List active" data-href="/xinbei/home.php">
+            <i class="iconfont"></i>&nbsp;&nbsp;&nbsp;&nbsp;Home
+        </div>
+        <div class="nav-left-Box-List" data-href="/xinbei/recharge.php">
+            <i class="iconfont"></i>&nbsp;&nbsp;&nbsp;&nbsp;Recharge
+        </div>
+        <div class="nav-left-Box-List" data-href="/xinbei/withdrawal.php">
+            <i class="iconfont"></i>&nbsp;&nbsp;&nbsp;&nbsp;Withdraw
+        </div>
+        <div class="nav-left-Box-List" data-href="/xinbei/memtrans.php">
+            <i class="iconfont"></i>&nbsp;&nbsp;&nbsp;&nbsp;Transfer
+        </div>
+        <div class="nav-left-Box-List" data-href="/xinbei/generate.php">
+            <i class="iconfont"></i>&nbsp;&nbsp;&nbsp;&nbsp;Generate eCheck
+        </div>
+        <div class="nav-left-Box-List" data-href="/xinbei/exchange.php">
+            <i class="iconfont"></i>&nbsp;&nbsp;&nbsp;&nbsp;Exchange eCheck
+        </div>
+        <div class="nav-left-Box-List" data-href="/xinbei/membership.php">
+            <i class="iconfont"></i>&nbsp;&nbsp;&nbsp;&nbsp;Invest
+        </div>
+        <div class="nav-left-Box-List" data-href="/xinbei/guide.php">
+            <i class="iconfont"></i>&nbsp;&nbsp;&nbsp;&nbsp;About
+        </div>
+                <div class="nav-left-Box-List" data-href="/xinbei/knowledgebase.php">
+            <i class="iconfont"></i>&nbsp;&nbsp;&nbsp;&nbsp;FAQ
+        </div>
+                <div class="nav-left-Box-List" data-href="/xinbei/partners.php">
+            <i class="iconfont"></i>&nbsp;&nbsp;&nbsp;&nbsp;Partners
+        </div>
+    </div>
+    <div class="bodyBox">
+        <iframe src="/xinbei/home.php" frameborder="0"></iframe>
+    </div>
+    <div class="zhezhaoBox">
+
+    </div>
+    <script>
+        const getBtcData = async () => {
+        fetch('https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById("info").innerHTML = '<b>1 BTC = ' + data.USD + ' USD</b>' ;
+            document.getElementById("info2").innerHTML = '$ ' + (data.USD * 58.81890).toFixed(2) ;
+        });
+        }
+        getBtcData();
+        tcount=setInterval(function(){
+        tcount++
+        if (tcount==10) {getBtcData(); tcount=0}
+        document.getElementById("infotime").innerHTML = 'Next update in ' + (10-tcount) + ' seconds'
+        },1000);
+    </script>
+    <script>
+        $('.menumenuBox').on('click',function(){
+            if( $('.nav-left-Box').attr('class')=='nav-left-Box active' ){
+                $('.nav-left-Box').removeClass('active');
+                $('.zhezhaoBox').removeClass('active');
+            }else{
+                $('.nav-left-Box').addClass('active');
+                $('.zhezhaoBox').addClass('active');
+            }
+        })
+        $('.zhezhaoBox').on('click',function(){
+            if($('.nav-left-Box').attr('class')=='nav-left-Box active'){
+                $('.nav-left-Box').removeClass('active');
+                $('.zhezhaoBox').removeClass('active');
+            }else{
+                $('.nav-left-Box').addClass('active');
+                $('.zhezhaoBox').addClass('active');
+            }
+        })
+        $('.nav-left-Box-List').on('click',function(){
+            $('.nav-left-Box-List').removeClass('active');
+            $(this).addClass('active');
+            $('.bodyBox iframe').attr('src',$(this).data('href'));
+            $('.nav-left-Box').removeClass('active');
+                $('.zhezhaoBox').removeClass('active');
+        })
+        function GetChildValue(obj){
+            if(obj=='login'){
+                location.href="/login.php"
+                return;
+            }
+           $('.nav-left-Box-List').removeClass('active');
+           $('.nav-left-Box-List').eq(obj*1+1).addClass('active');
+         }
+    </script>
+    <!-- <div class="bodyBox">
+        <div class="loginBox">
+            <div class="tfrow">
+                <div class="label">Account:</div>
+                <input type="text" name="phone" placeholder="Mobile Number / Email" />
+            </div>
+            <div class="tfrow">
+                <div class="label">Password:</div>
+                <input type="password" name="password" placeholder="Login Password" />
+            </div>
+            <div class="tfrow">
+                <div class="label">Captcha:</div>
+                <input type="text" name="code" placeholder="" style="width:30%"/>
+                <img class="codeimg" src="image/rand/gen1.png"/>
+            </div> 
+            <div class="tfrow">
+                <button type="button" class="dldl" onclick="denglu(this)">Log in</button>
+            </div>
+            <div class="tfrow" style="justify-content:space-between">
+                <a href="/Home/Login/forgetpass">Forgot password?</a>
+                <a href="/Home/Login/regHtml">Sign up for free</a>
+            </div>
+    </div>
+    <script>
+        parent.GetChildValue('login');
+        function denglu(e){
+            var phone = $('input[name="phone"]').val();//手机号
+            var password = $('input[name="password"]').val();//密码
+            var code = $('input[name="code"]').val();//验证码
+            if(!phone){
+                layer.msg('please fill account');return;
+            }if(!password){
+                layer.msg('Please fill password');return;
+            }if(!code){
+                layer.msg('please fill captcha');return;
+            }
+            $(e).attr('disabled','disabled');//提交ajax时禁用按钮
+            $.ajax({
+                type:"POST",
+                url:"/Home/Login/logo",
+                data:{
+                    account:phone,
+                    pwd:password,
+                    code:code
+                },
+                //请求成功
+                success : function(result) {
+                    if(result.status==200){
+                        location.href="/Home/Index/index";
+                        return;
+                    }else{
+                        $('.codeimg').attr('src',"/Home/Login/verify/r/539")
+                        layer.msg(result.msg);
+                    }
+                    $(e).removeAttr('disabled');//提交成功时启用按钮
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+        }
+    </script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?353a866ab2e8aa6e4d64074053dac7a1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script> -->
+  </body>
+</html>
